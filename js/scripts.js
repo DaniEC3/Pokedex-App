@@ -1,21 +1,6 @@
 let pokemonRepository = (function () {
-	let pokemonList = [
-		{ 
-		name : 'Bulbasaur',
-		height : 0.7, 
-		types : ['Grass','Poison']
-		},
-		{ 
-		name : 'Charmander',
-		height : 0.6,
-		types : ['Fire']
-		},
-		{ 
-		name : 'Squirtle',
-		height : 0.5,
-		types : ['Water']
-		}
-	]
+	let pokemonList = [];
+	let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
 	function getAll(){
 		return pokemonList;
@@ -53,7 +38,39 @@ let pokemonRepository = (function () {
   }
 
   function showDetails(pokemon) {
-  	console.log(pokemon)
+  loadDetails(pokemon).then(function () {
+    console.log(pokemon);
+  });
+}
+
+  function loadList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch(function (e) {
+      console.error(e);
+    })
+  }
+
+  function loadDetails(item) {
+    let url = item.detailsUrl;
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (details) {
+      // Now we add the details to the item
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = details.types;
+    }).catch(function (e) {
+      console.error(e);
+    });
   }
 	
 
@@ -61,14 +78,17 @@ let pokemonRepository = (function () {
 		getAll: getAll,
 		add: add,
 		addListItem: addListItem,
-		showDetails: showDetails
+		showDetails: showDetails,
+		loadList: loadList,
+		loadDetails: loadDetails
 	}
 })();
 
-pokemonList = pokemonRepository.getAll()
-
-pokemonList.forEach(function(pokemon){
-	pokemonRepository.addListItem(pokemon)
+pokemonRepository.loadList().then(function() {
+  // Now the data is loaded!
+  pokemonRepository.getAll().forEach(function(pokemon){
+    pokemonRepository.addListItem(pokemon);
+  });
 });
 
 
