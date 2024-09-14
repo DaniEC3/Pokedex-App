@@ -2,6 +2,8 @@ let pokemonRepository = (function () {
 	let pokemonList = [];
 	let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
   let modalContainer = document.querySelector('#modal-container');
+  let pokemonTypes = ['normal','fighting','flying','poison','ground','rock','bug','ghost','steel','fire','water','grass','electric','physic','ice','dragon','dark','fairy','stellar','unknow']
+  let pokemonTypesColor = ['#CFCFCF','#FFBF7F','#C0DCF7','#C89EE5','#C8A78C','#D7D4C0','#C8D088','#B79EB7','#AFD0DB','#F29091','#91BFF7','#9DD091','#FCDF7F','#F69EBC','#9DEBFF','#A6AFF0','#A69E9D','#F6B7F7','#9370DB','#DCDCDC']
 
 	function getAll(){
 		return pokemonList;
@@ -102,107 +104,17 @@ let pokemonRepository = (function () {
   });
 
   function backGroundType(pokemon,button) {
-    if (pokemon.types[0].type.name === 'normal') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#CFCFCF';
-      button.style.backgroundColor = '#CFCFCF';
-    }
-    else if (pokemon.types[0].type.name === 'fighting') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#FFBF7F';
-      button.style.backgroundColor = '#FFBF7F';
-    }
-    else if (pokemon.types[0].type.name === 'flying') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#C0DCF7';
-      button.style.backgroundColor = '#C0DCF7';
-    }
-    else if (pokemon.types[0].type.name === 'poison') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#C0DCF7';
-      button.style.backgroundColor = '#C0DCF7';
-    }
-    else if (pokemon.types[0].type.name === 'ground') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#C8A78C';
-      button.style.backgroundColor = '#C8A78C';
-    }
-    else if (pokemon.types[0].type.name === 'rock') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#D7D4C0';
-      button.style.backgroundColor = '#D7D4C0';
-    }
-    else if (pokemon.types[0].type.name === 'bug') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#C8D088';
-      button.style.backgroundColor = '#C8D088';
-    }
-    else if (pokemon.types[0].type.name === 'ghost') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#B79EB7';
-      button.style.backgroundColor = '#B79EB7';
-    }
-    else if (pokemon.types[0].type.name === 'steel') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#AFD0DB';
-      button.style.backgroundColor = '#AFD0DB';
-    }
-    else if (pokemon.types[0].type.name === 'fire') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#F29091';
-      button.style.backgroundColor = '#F29091';
-    }
-    else if (pokemon.types[0].type.name === 'water') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#91BFF7';
-      button.style.backgroundColor = '#91BFF7';
-    }
-    else if (pokemon.types[0].type.name === 'grass') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#9DD091';
-      button.style.backgroundColor = '#9DD091';
-    }
-    else if (pokemon.types[0].type.name === 'electric') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#FCDF7F';
-      button.style.backgroundColor = '#FCDF7F';
-    }
-    else if (pokemon.types[0].type.name === 'psychic') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#F69EBC';
-      button.style.backgroundColor = '#F69EBC';
-    }
-    else if (pokemon.types[0].type.name === 'ice') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#9DEBFF';
-      button.style.backgroundColor = '#9DEBFF';
-    }
-    else if (pokemon.types[0].type.name === 'dragon') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#A6AFF0';
-      button.style.backgroundColor = '#A6AFF0';
-    }
-    else if (pokemon.types[0].type.name === 'dark') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#A69E9D';
-      button.style.backgroundColor = '#A69E9D';
-    }
-    else if (pokemon.types[0].type.name === 'fairy') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#F6B7F7';
-      button.style.backgroundColor = '#F6B7F7';
-    }
-    else if (pokemon.types[0].type.name === 'stellar') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#9370DB';
-      button.style.backgroundColor ='#9370DB';
-    }
-    else if (pokemon.types[0].type.name === 'unknown') {
-      let pokemonModal = document.querySelector('.modal');
-      pokemonModal.style.backgroundColor = '#DCDCDC';
-      button.style.backgroundColor ='#DCDCDC';
-    }
-  }
+
+    pokemon = pokemon.types[0].type.name;
+
+    pokemonTypes.forEach(function(item, index){
+      if (item === pokemon) {
+        let pokemonModal = document.querySelector('.modal');
+        pokemonModal.style.backgroundColor = pokemonTypesColor[index];
+        button.style.backgroundColor = pokemonTypesColor[index];
+      }
+    })
+   }
 
   modalContainer.addEventListener('click', (e) => {
     // Since this is also triggered when clicking INSIDE the modal
@@ -266,7 +178,6 @@ pokemonRepository.loadList().then(function() {
   // Now the data is loaded!
   pokemonRepository.getAll().forEach(function(pokemon){
     pokemonRepository.addListItem(pokemon);
-
   });
 });
 
