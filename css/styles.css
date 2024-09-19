@@ -1,7 +1,43 @@
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #2E7D32;
+    --background-color: #F5F5DC;
+}
+
 *{
 	box-sizing: border-box;
 	font-family: Inter,sans-serif;
 }
+
+
+/*Header*/
+
+.navbar {
+  height: 100px;
+  background-color: var(--primary-color);
+  border-bottom: 5px solid #111;
+  margin-bottom: 20px;
+}
+
+/*Bootstrap classes*/
+
+.btn-outline-success {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.list-group-item {
+    background-color: transparent; 
+    border: none;
+    padding: 0; 
+    margin: 0; 
+    color: inherit; 
+}
+
+
+/*End Bootstrap Classes*/
+
+/*End Header*/
 
 /*Modal Container*/
 
@@ -25,6 +61,7 @@
   display: grid;
   text-align: center;
 }
+
 
 .modal {
   margin: auto;
@@ -65,11 +102,19 @@ h2{
 
 /*End Modal Container*/
 
+body {
+  background-color:var(--background-color) ;
+}
+
 
 h1 {
   text-align: center;
+  color: var(--secondary-color);
 }
 
+h1:hover {
+  cursor: default;
+}
 
 
 .list-button {
@@ -77,6 +122,7 @@ h1 {
   background-color: #fee6e3;
   border: 2px solid #111;
   border-radius: 8px;
+  width: 75%;
   
   color: #111;
   cursor: pointer;
@@ -149,5 +195,24 @@ li {
 
 .pokemon-info .height-info, .pokemon-info .type-info {
   padding: 10px;
+
+}
+
+
+
+
+
+
+/********** Extra small devices only **********/
+@media (max-width: 767px) {
+  /* Home Page */
+  .navbar {
+    height: 170px;
+  }
+
+  .list-button{
+    width: 90%;
+  }
+  /* End Home Page */
 
 }

@@ -22,14 +22,22 @@ let pokemonRepository = (function () {
 
   function addListItem(pokemon){
   	let pokemon_list = document.querySelector('.pokemon-list');
-		let listItem = document.createElement('li');
-		let button = document.createElement('button');
+    let listRow = document.querySelector('.row');
+    listRow.classList.add('row');
 
-		button.classList.add('list-button');
+		let listItem = document.createElement('li');
+    listItem.classList.add('col-lg-4','col-md-6','col-12','list-group-item');
+
+		let button = document.createElement('button');
+		button.classList.add('list-button','btn');
 
 		button.innerText = pokemon.name;
-		listItem = pokemon_list.appendChild(listItem);
-		listItem.appendChild(button);
+
+    listRow.appendChild(listItem);
+    listItem.appendChild(button);
+
+    pokemon_list.appendChild(listRow);
+
 		add_event(button, pokemon);
 
   }
