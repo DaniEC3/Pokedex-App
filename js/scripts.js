@@ -63,7 +63,7 @@ let pokemonRepository = (function () {
 
     let filterPokemon = filterItems(pokemonList,query);
     let pokemon_list = document.querySelector('.row');
-    console.log(pokemonList)
+    console.log(pokemonList);
 
     while (pokemon_list.firstChild) {
       pokemon_list.removeChild(pokemon_list.firstChild);
@@ -72,7 +72,7 @@ let pokemonRepository = (function () {
     filterPokemon.forEach(function(pokemon){
       addListItem(pokemon);
       console.log(pokemon);
-      })
+      });
 
   }
 
@@ -192,7 +192,7 @@ let pokemonRepository = (function () {
       console.error(e);
     });
   }
-  
+
 	return {
 		getAll: getAll,
 		add: add,
