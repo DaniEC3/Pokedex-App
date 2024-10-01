@@ -24,7 +24,7 @@ let pokemonRepository = (function () {
   function addListItem(pokemon){
   	let pokemon_list = document.querySelector('.pokemon-list');
     let listRow = document.querySelector('.row');
-    listRow.classList.add('row');
+
 		let listItem = document.createElement('li');
     listItem.classList.add('col-lg-4','col-md-6','col-12','list-group-item');
 
@@ -63,16 +63,27 @@ let pokemonRepository = (function () {
 
     let filterPokemon = filterItems(pokemonList,query);
     let pokemon_list = document.querySelector('.row');
-    console.log(pokemonList);
+    
 
     while (pokemon_list.firstChild) {
       pokemon_list.removeChild(pokemon_list.firstChild);
     }
 
-    filterPokemon.forEach(function(pokemon){
-      addListItem(pokemon);
-      console.log(pokemon);
-      });
+    filterPokemon.forEach(function(pokemon) {
+      addListItem(pokemon,filterPokemon);
+      // Solves the problem with the size of the button for when there is only one pokemon
+      if (filterPokemon.length === 1) {  
+        let listItem = document.querySelector('li');
+        listItem.classList.remove('col-lg-4','col-md-6');
+        listItem.classList.add('col-lg-12');     
+      }
+      if (filterPokemon.length === 2) {  
+        let listItem = document.querySelector('li');
+        listItem.classList.remove('col-lg-4','col-md-6');
+        listItem.classList.add('col-lg-6');     
+      }
+      
+    });
 
   }
 
