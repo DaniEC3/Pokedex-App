@@ -1,5 +1,5 @@
 # Pokedex Web App 
-Welcome to the Pokedex Web App—a modern, interactive web application designed for Pokémon enthusiasts! This project allows users to explore a comprehensive collection of Pokémon, view detailed stats, and search for their favorite creatures.
+Welcome to the Pokedex Web App. This project allows users to explore a collection of Pokémon, view stats, and search them by name.
 
 # Features
 - Search Functionality: Quickly find Pokémon by name.
